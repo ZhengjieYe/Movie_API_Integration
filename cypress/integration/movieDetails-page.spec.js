@@ -48,10 +48,20 @@ describe("Movie Details Page", () => {
       })
   });
 
-  it.only("should display the Home icon with the correct URL value", () => {
+  it("should display the Home icon with the correct URL value", () => {
     cy.get(".fa-home")
       .parent()
       .should("have.attr", "href")
       .should("eq", movie.homepage);
   });
+
+  it("should display the movie image with right src attribute",() => {
+      cy.get('[data-test="movie_card_img"]')
+        .should("have.attr","src")
+        // .should("include",movie.poster_path)
+        .should(($src) => {
+            const spilitedArr = $src.split("//");
+            expect("/"+spilitedArr[spilitedArr.length-1]).to.eq(movie.poster_path);
+        });
+  })
 });
