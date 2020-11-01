@@ -29,6 +29,7 @@ export default ({ movie }) => {
                 <td>
                   {" "}
                   <Link
+                    data-test="movie_reviews_link"
                     to={{
                         pathname:`/reviews/${r.id}`,
                         state:{
