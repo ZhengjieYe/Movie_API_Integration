@@ -71,4 +71,43 @@ describe("Home Page ", () => {
       });
     })
   })
+  describe("By movie tile and genre",() => {
+    it("should display movies with 'o' in title and specified genre only",() => {
+      const searchString = "o";
+      const selectedGenreId = 35;
+      const selectedGenreText = "Comedy";
+      const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectedGenreId);
+      cy.get("input").clear().type(searchString);
+      cy.get("select").select(selectedGenreText);
+      cy.get(".card").should("have.length", matchingMovies.length);
+      cy.get(".card").each(($card, index) => {
+        cy.wrap($card)
+          .find(".card-title")
+          .should("have.text", matchingMovies[index].title);
+      })
+    })
+
+    it("should display movies with 'p' in title and specified genre only",() => {
+      const searchString = "p";
+      const selectedGenreId = 35;
+      const selectedGenreText = "Comedy";
+      const matchingMovies = filterByGenre(filterByTitle(movies, searchString), selectedGenreId);
+      cy.get("input").clear().type(searchString);
+      cy.get("select").select(selectedGenreText);
+      cy.get(".card").should("have.length", matchingMovies.length);
+      cy.get(".card").each(($card, index) => {
+        cy.wrap($card)
+          .find(".card-title")
+          .should("have.text", matchingMovies[index].title);
+      })
+    })
+
+    it("should not display movies with 'xyz' in title and specified genre only",() => {
+      const searchString = "xyz";
+      const selectedGenreText = "Comedy";
+      cy.get("input").clear().type(searchString);
+      cy.get("select").select(selectedGenreText);
+      cy.get(".card").should("have.length", 0);
+    })
+  })
 })
