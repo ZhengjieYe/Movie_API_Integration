@@ -11,6 +11,8 @@ import AddFavoriteButton from "../src/components/buttons/addToFavorites";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
+import MoviesContextProvider from '../src/contexts/moviesContext'
+import ReviewForm from '../src/components/reviewForm'
 
 const sample = {
   adult: false,
@@ -152,3 +154,14 @@ storiesOf("Movie Details Page/MovieHeader", module)
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => <MovieHeader movie={sample} />);
+
+
+  storiesOf("Add review Page/reviewForm",module)
+  .addDecorator(story =>(
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .addDecorator(story =>(
+    <MoviesContextProvider>{story()}</MoviesContextProvider>
+  ))
+    .add("default",()=><ReviewForm movie={sample} />)
+
