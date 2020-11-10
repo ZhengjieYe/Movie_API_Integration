@@ -48,24 +48,24 @@ describe("Navigation", () => {
     });
   });
 
-  describe("From the Movie Details page ", () => {
-    beforeEach(() => {
-      cy.visit(`/movies/${movieId}`);
-    });
-    it("should change browser URL when show/hide reviews is clicked", () => {
-      cy.contains("Show Reviews").click();
-      cy.url().should("include", `/movies/${movieId}/reviews`);
-      cy.contains("Hide Reviews").click();
-      cy.url().should("not.include", `/movies/${movieId}/reviews`);
-    });
-    it("navigate to the full review page when a 'Full Review' link is clicked", () => {
-        cy.contains("Show Reviews").click();
-        cy.url().should("include", `/movies/${movieId}/reviews`);
-        cy.get('[data-test="movie_reviews_link"]').eq(0).click();
-        cy.url().should("include", `/reviews/${reviews[0].id}`);
-        cy.get('[data-test="movie_review_author"]').contains(reviews[0].author);
-    });
-  });
+  // describe("From the Movie Details page ", () => {
+  //   beforeEach(() => {
+  //     cy.visit(`/movies/${movieId}`);
+  //   });
+  //   it("should change browser URL when show/hide reviews is clicked", () => {
+  //     cy.contains("Show Reviews").click();
+  //     cy.url().should("include", `/movies/${movieId}/reviews`);
+  //     cy.contains("Hide Reviews").click();
+  //     cy.url().should("not.include", `/movies/${movieId}/reviews`);
+  //   });
+  //   it("navigate to the full review page when a 'Full Review' link is clicked", () => {
+  //       cy.contains("Show Reviews").click();
+  //       cy.url().should("include", `/movies/${movieId}/reviews`);
+  //       cy.get('[data-test="movie_reviews_link"]').eq(0).click();
+  //       cy.url().should("include", `/reviews/${reviews[0].id}`);
+  //       cy.get('[data-test="movie_review_author"]').contains(reviews[0].author);
+  //   });
+  // });
 
   describe("From the Favorites page", () => {
     beforeEach(() => {
