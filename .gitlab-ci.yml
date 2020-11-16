@@ -3,6 +3,7 @@ image: cypress/browsers:node12.0.0-chrome73
 stages:
    - install
    - build
+   - zhengjieye_homework
    - test
 
 # NEW
@@ -39,6 +40,13 @@ build_jobX:
     - demobranch
   script:
     - echo "build job X on demoBranch works"
+
+exercise_job:
+  stage: zhengjieye_homework
+  only:
+    - master
+  script:
+    - echo "exercise_job of zhengjieye_homework stage on master only"
 
 e2etest:    
     stage: test
