@@ -3,8 +3,8 @@ image: cypress/browsers:node12.0.0-chrome73
 stages:
    - install
    - build
-   - zhengjieye_homework
    - test
+   - deploy
 
 # NEW
 variables:
@@ -34,20 +34,6 @@ bundle_app:
     paths:
       - build/
 
-build_jobX:
-  stage: build
-  only:
-    - demobranch
-  script:
-    - echo "build job X on demoBranch works"
-
-exercise_job:
-  stage: zhengjieye_homework
-  only:
-    - master
-  script:
-    - echo "exercise_job of zhengjieye_homework stage on master only"
-
 e2etest:    
     stage: test
     before_script:
@@ -57,10 +43,31 @@ e2etest:
        # start the server in the background
       - npm run start:ci
       
-test_jobX:
-  stage: test
+
+deploy_staging_job:
+  stage: deploy
+  only:
+    - staging
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo -e "$STAGING_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - echo -n "Deploy staging to test server..."
+    - ssh ec2-user@$STAGING_DEPLOY_SERVER 'cd staging_CICD && git pull origin staging && pm2 restart staging'
+
+deploy_master_job:
+  stage: deploy
   only:
     - master
-    - demobranch2
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo -e "$MASTER_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ls
   script:
-    - echo "test job X"
+    - scp -r build ec2-user@$MASTER_DEPLOY_SERVER:/home/ec2-user
+    - ssh ec2-user@$MASTER_DEPLOY_SERVER 'rm -rf CICD/ && mv build/ CICD/'
