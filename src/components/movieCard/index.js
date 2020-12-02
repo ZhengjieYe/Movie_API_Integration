@@ -13,6 +13,7 @@ const MovieCard = ({movie, action}) => {
         <img
           className="card-img-tag center "
           alt={movie.title}
+          data-test="movie-card-img"
           src={
             movie.poster_path
               ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
