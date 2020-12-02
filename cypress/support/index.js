@@ -18,5 +18,6 @@ import './commands'
 import '@cypress/code-coverage/support'
 import 'cypress-react-unit-test/support'
 require('@cypress/skip-test/support')
+require('cypress-commands');
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

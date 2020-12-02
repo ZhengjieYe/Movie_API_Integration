@@ -7,6 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",
+    "cypress-commands": "^1.1.0",
     "dotenv": "^8.2.0",
     "istanbul-lib-coverage": "^3.0.0",
     "nyc": "^15.1.0",
