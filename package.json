@@ -43,6 +43,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^6.0.0",
     "cypress": "^5.5.0",
+    "cypress-pipe": "^2.0.0",
     "cypress-react-unit-test": "^4.17.1",
     "start-server-and-test": "^1.10.6"
   }
