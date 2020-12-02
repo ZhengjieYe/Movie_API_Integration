@@ -11,6 +11,7 @@ const ReviewButton = ({ movie }) => {
               movie:movie
           }
       }}
+      data-test="wirte-review-button"
     >
       Write a Review
     </Link>

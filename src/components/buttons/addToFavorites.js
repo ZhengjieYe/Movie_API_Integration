@@ -13,6 +13,7 @@ const AddToFavoriteButton = ({ movie }) => {
       type="button"
       className="btn w-100 btn-primary"
       onClick={handleAddToFavorite}
+      data-test="add-to-favorites-button"
     >
       Add to Favorites
     </button>

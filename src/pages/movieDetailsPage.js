@@ -21,6 +21,7 @@ const MoviePage = props => {
               <Link
                 className="btn btn-primary btn-block active"
                 to={`/movies/${id}/reviews`}
+                data-test="show-review-button"
               >
                 Show Reviews (Extracts)
               </Link>
@@ -28,6 +29,7 @@ const MoviePage = props => {
               <Link
                 className="btn btn-primary btn-block active"
                 to={`/movies/${id}`}
+                data-test="hide-review-button"
               >
                 Hide Reviews 
               </Link>

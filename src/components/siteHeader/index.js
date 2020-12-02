@@ -33,12 +33,12 @@ const SiteHeader = () => {
             </Link>
           </li>
           <li className="nav-item">
-              <Link className="nav-link text-white" to="/movies/upcoming">
+              <Link className="nav-link text-white" to="/movies/upcoming" data-test="site-header-upcoming">
                 Upcoming
               </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/movies/favorites">
+            <Link className="nav-link text-white" to="/movies/favorites" data-test="site-header-favorites">
               Favorites
             </Link>
           </li>

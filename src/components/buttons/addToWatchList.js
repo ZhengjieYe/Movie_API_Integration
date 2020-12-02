@@ -13,6 +13,7 @@ const ReviewButton = ({ movie }) => {
       type="button"
       className="btn w-100 btn-primary"
       onClick={handleAddToWatchList}
+      data-test="add-to-watch-button"
     >
       Add to Watch List
     </button>
