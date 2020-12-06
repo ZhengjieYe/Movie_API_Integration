@@ -2,12 +2,12 @@ import React from "react";
 
 const Header = ({ title, numMovies }) => {
   return (
-    <div className="row">
-      <div className="col-md-6 offset-4">
-        <h2>
+    <div>
+      <div className="text-black">
+        <h4>
           {`${title}  `}
-          <span className="badge badge-pill badge-success">{numMovies}</span>
-        </h2>
+          <span className="badge badge-pill badge-success" data-test="header-number">{numMovies}</span>
+        </h4>
       </div>
     </div>
   );

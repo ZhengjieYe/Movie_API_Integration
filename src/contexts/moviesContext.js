@@ -32,6 +32,21 @@ const reducer = (state, action) => {
         ),
         movies:[...state.movies],
       } 
+    case "remove-favorite":
+      return {
+        movies: state.movies.map((m) =>
+          m.id === action.payload.movie.id ? { ...m, favorite: false } : m
+        ),
+        upcoming: [...state.upcoming],
+      }
+    case "remove-watchlist":
+      return {
+        upcoming:state.upcoming.map((u)=>
+          u.id === action.payload.upcoming.id ? {...u, isInWatchList: false } : u
+        ),
+        movies:[...state.movies],
+      } 
+      
     default:
       return state;
   }
@@ -54,9 +69,20 @@ const MoviesContextProvider = (props) => {
     dispatch({ type: "add-review", payload: { movie, review } });
   };
 
+  const removeFromFavorites = (movieId) => {
+    const index = state.movies.map((m) => m.id).indexOf(movieId);
+    dispatch({ type: "remove-favorite", payload: { movie: state.movies[index] } });
+  }
+  const removeFromWatchlist = (movieId) => {
+    const index = state.upcoming.map((m) => m.id).indexOf(movieId);
+    dispatch({ type: "remove-watchlist", payload: { upcoming: state.upcoming[index] } });
+  }
+
+
   useEffect(() => {
     getMovies().then((movies) => {
       dispatch({ type: "load", payload: { movies } });
+      dispatch({ payload: { movies } }); //run default case
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -75,7 +101,9 @@ const MoviesContextProvider = (props) => {
         upcoming: state.upcoming,
         addToFavorites: addToFavorites,
         addReview: addReview,
-        addToWatchList:addToWatchList
+        addToWatchList:addToWatchList,
+        removeFromFavorites:removeFromFavorites,
+        removeFromWatchlist:removeFromWatchlist
       }}
     >
       {props.children}

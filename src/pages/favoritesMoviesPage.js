@@ -8,8 +8,9 @@ const FavoriteMoviesPage = props => {
   const favorites = context.movies.filter( m => m.favorite )
   return (
     <MovieListPageTemplate
+      title="Favorite Movies"
       movies={favorites}
-      title={"Favorite Movies"}
+      carouselAction={movie => <AddReviewButton movie={movie} />}
       action={movie => <AddReviewButton movie={movie} />}
     />
   );

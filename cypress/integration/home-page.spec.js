@@ -33,10 +33,9 @@ describe("Home Page ", () => {
         const matchingMovies = filterByTitle(movies, searchString );
         cy.get("input").clear().type(searchString) ;
         cy.get(".card").should("have.length", matchingMovies.length);
-        cy.get(".card").each(($card, index) => {
+        cy.getBySel("movie-card-title").each(($card, index) => {
           cy.wrap($card)
-          .find(".card-title")
-          .should("have.text", matchingMovies[index].title);
+          .should("include.text", String(matchingMovies[index].title.substr(0,15)));
         });
       })
       it("should display movies with 'o' in the title", () => {
@@ -44,11 +43,10 @@ describe("Home Page ", () => {
         const matchingMovies = filterByTitle(movies, searchString);
         cy.get("input").clear().type(searchString);
         cy.get(".card").should("have.length", matchingMovies.length);
-        cy.get(".card").each(($card, index) => {
+        cy.getBySel("movie-card-title").each(($card, index) => {
           cy.wrap($card)
-          .find(".card-title")
-          .should("have.text", matchingMovies[index].title);
-        })
+          .should("include.text", String(matchingMovies[index].title.substr(0,15)));
+        });
       })
       it("should not display any movies with 'xyz' in the title",() => {
         const searchString = "xyz";
@@ -63,11 +61,10 @@ describe("Home Page ", () => {
         const matchingMovies = filterByGenre(movies, selectedGenreId);
         cy.get("select").select(selectedGenreText); 
         cy.get(".card").should("have.length", matchingMovies.length);
-        cy.get(".card").each(($card, index) => {
+        cy.getBySel("movie-card-title").each(($card, index) => {
           cy.wrap($card)
-            .find(".card-title")
-            .should("have.text", matchingMovies[index].title);
-        });      
+          .should("include.text", String(matchingMovies[index].title.substr(0,15)));
+        });   
       });
     })
   })
@@ -80,11 +77,10 @@ describe("Home Page ", () => {
       cy.get("input").clear().type(searchString);
       cy.get("select").select(selectedGenreText);
       cy.get(".card").should("have.length", matchingMovies.length);
-      cy.get(".card").each(($card, index) => {
+      cy.getBySel("movie-card-title").each(($card, index) => {
         cy.wrap($card)
-          .find(".card-title")
-          .should("have.text", matchingMovies[index].title);
-      })
+        .should("include.text", String(matchingMovies[index].title.substr(0,15)));
+      });
     })
 
     it("should display movies with 'p' in title and specified genre only",() => {
@@ -95,11 +91,10 @@ describe("Home Page ", () => {
       cy.get("input").clear().type(searchString);
       cy.get("select").select(selectedGenreText);
       cy.get(".card").should("have.length", matchingMovies.length);
-      cy.get(".card").each(($card, index) => {
+      cy.getBySel("movie-card-title").each(($card, index) => {
         cy.wrap($card)
-          .find(".card-title")
-          .should("have.text", matchingMovies[index].title);
-      })
+        .should("include.text", String(matchingMovies[index].title.substr(0,15)));
+      });
     })
 
     it("should not display movies with 'xyz' in title and specified genre only",() => {
