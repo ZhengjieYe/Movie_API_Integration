@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 const MovieHeader = ({ movie, history }) => {
   return (
-    <div className="row">
+    <div className="row mt-5 pt-3">
              <div className="col-2">
           <button onClick={() => history.goBack()}>
             <FontAwesomeIcon icon={["fas", "arrow-circle-left"]} size="2x" />
