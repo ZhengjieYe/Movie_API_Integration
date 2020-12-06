@@ -5,7 +5,7 @@ import AddButton from './addButton'
 import SuccessButton from './successButton'
 import RemoveAlert from '../alert/removeAlert'
 
-const ReviewButton = ({movie, removeAlertAction, addButtonAction}) => {
+const ReviewButton = ({movie, removeAlertAction, addButtonAction,addButtonTestName}) => {
   const [show, setShow] = useState(false);
 
    return (
@@ -17,7 +17,7 @@ const ReviewButton = ({movie, removeAlertAction, addButtonAction}) => {
       {
         movie.isInWatchList?
           <SuccessButton setShow={setShow}/>:
-          <AddButton id={movie.id} clickAction={addButtonAction}/>
+          <AddButton id={movie.id} clickAction={addButtonAction} testName={addButtonTestName}/>
       }
     </span>
   </OverlayTrigger>

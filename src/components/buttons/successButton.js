@@ -9,10 +9,10 @@ const SuccessButton = ({setShow,content,size}) => {
     variant="danger"
     onClick={()=>setShow(true)}
     size={size}
-    data-test="add-to-favorites-button--success"
+    data-test="add-to-button--success"
   >
     <FontAwesomeIcon icon={faCheck}/>
-    {content!=null && <span className="ml-2">Already in {content}</span>}
+    {content!=null && <span className="ml-2" data-test="add-to-content--success">Already in {content}</span>}
   </Button>
   );
 };

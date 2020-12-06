@@ -19,6 +19,7 @@ const MovieListPage = () => {
            removeAlertAction={context.removeFromWatchlist} 
            addButtonAction={context.addToWatchList} 
            content="Watchlist"
+           addButtonTestName="add-to-watch-button--carousel"
           />
         }}
         action={(movie) => {
@@ -26,6 +27,7 @@ const MovieListPage = () => {
             movie={movie} 
             removeAlertAction={context.removeFromWatchlist} 
             addButtonAction={context.addToWatchList}
+            addButtonTestName="add-to-watch-button"
           /> 
         }}
       />
