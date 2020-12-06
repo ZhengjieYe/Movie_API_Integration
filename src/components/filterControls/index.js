@@ -17,9 +17,9 @@ const FilterControls = props => {
   };
 
   return (
-    <div className="row bg-warning">
-      <div className="col-md-12">
-        <h4>
+    <div className="text-white mt-2">
+      <div>
+        <h5>
           <span>List Filtering:</span>
           <input
             type="text"
@@ -36,7 +36,7 @@ const FilterControls = props => {
               );
             })}
           </select>
-        </h4>
+        </h5>
       </div>
     </div>
   );
