@@ -18,6 +18,7 @@ const MovieListPage = () => {
            removeAlertAction={context.removeFromFavorites} 
            addButtonAction={context.addToFavorites} 
            content="Favorites"
+           addButtonTestName="add-to-favorites-button--carousel"
           />
         }}
         action={(movie) => {
@@ -25,6 +26,7 @@ const MovieListPage = () => {
             movie={movie} 
             removeAlertAction={context.removeFromFavorites} 
             addButtonAction={context.addToFavorites}
+            addButtonTestName="add-to-favorites-button"
           /> 
         }}
       />

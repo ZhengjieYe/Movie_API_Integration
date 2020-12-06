@@ -5,7 +5,7 @@ import AddButton from './addButton'
 import SuccessButton from './successButton'
 import RemoveAlert from '../alert/removeAlert'
 
-const AddToFavoriteButton = ({ movie, removeAlertAction, addButtonAction}) => {
+const AddToFavoriteButton = ({ movie, removeAlertAction, addButtonAction,addButtonTestName}) => {
   const [show, setShow] = useState(false);
   return (
   <OverlayTrigger 
@@ -16,7 +16,7 @@ const AddToFavoriteButton = ({ movie, removeAlertAction, addButtonAction}) => {
       {
         movie.favorite?
           <SuccessButton setShow={setShow}/>:
-          <AddButton id={movie.id} clickAction={addButtonAction}/>
+          <AddButton id={movie.id} clickAction={addButtonAction} testName={addButtonTestName}/>
       }
     </span>
   </OverlayTrigger>

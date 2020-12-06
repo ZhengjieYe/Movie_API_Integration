@@ -1,17 +1,22 @@
 describe("movie review page",()=>{
     describe("review on detailed movie page",()=>{
         let reviewId;
-
+        let resquestId;
         before(() => {
-            cy.request(
-              `https://api.themoviedb.org/3/movie/531219/reviews?api_key=${Cypress.env(
-                "TMDB_KEY"
-              )}`
-            )
-              .its("body")
-              .then((response) => {
-                reviewId=response.results[0].id;
-              })
+            cy.visit("/")
+            cy.get(".card").eq(2).find("img").click();
+            cy.url().then(($url)=>{
+                resquestId=$url.split("/").pop();
+                cy.request(
+                    `https://api.themoviedb.org/3/movie/${resquestId}/reviews?api_key=${Cypress.env(
+                      "TMDB_KEY"
+                    )}`
+                  )
+                    .its("body")
+                    .then((response) => {
+                      reviewId=response.results[0].id;
+                    })
+            })
         });
         it("should toggle between show and hidden",()=>{
             cy.visit("/");
@@ -22,7 +27,8 @@ describe("movie review page",()=>{
         })
 
         it("should show full review when you click the show full review button",()=>{
-            cy.visit("/movies/531219");
+            cy.visit("/");
+            cy.get(".card").eq(2).find("img").click();
             cy.getBySel("show-review-button").click();
             cy.contains("Full Review").click();
             cy.url().should("match",new RegExp(`${reviewId}$`));
@@ -34,7 +40,7 @@ describe("movie review page",()=>{
             cy.visit("/");
             cy.getBySel("add-to-favorites-button").eq(0).click();
             cy.getBySel("site-header-favorites").click();
-            cy.getBySel("wirte-review-button").click();
+            cy.getBySel("wirte-review-button").eq(0).click();
         })
         it("should enter the /review/form page when you click write review button",()=>{
             cy.url().should("include","/reviews/form");

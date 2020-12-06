@@ -3,7 +3,7 @@ import AddButton from './addButton'
 import SuccessButton from './successButton'
 import RemoveAlert from '../alert/removeAlert'
 
-const ComboButton = ({item,removeAlertAction,addButtonAction,content}) => {
+const ComboButton = ({item,removeAlertAction,addButtonAction,content,addButtonTestName}) => {
   const [show, setShow] = useState(false);
   const [attr,setAttr]=useState(false);
   useEffect(()=>{
@@ -24,7 +24,7 @@ const ComboButton = ({item,removeAlertAction,addButtonAction,content}) => {
           <SuccessButton setShow={setShow} content={content} size="lg"/>:
           <AddButton
             clickAction={addButtonAction}
-            testName=""
+            testName={addButtonTestName}
             id={item.id} 
             content={content}
             size="lg" 
