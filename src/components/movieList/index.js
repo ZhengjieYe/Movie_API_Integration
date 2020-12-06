@@ -6,7 +6,7 @@ const MovieList = ({movies, action}) => {
   const movieCards = movies.map(m => (
     <Movie key={m.id} movie={m} action={action} />
   ));
-  return <div className="row movies bg-info">{movieCards}</div>;
+  return <div className="row movies w-100 m-0" style={{backgroundColor:"black"}}>{movieCards}</div>;
 };
 
 export default MovieList;
