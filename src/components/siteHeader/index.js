@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import "./siteHeader.css";
+import Icon from '../../assets/img/TMDB.png'
+import Image from 'react-bootstrap/Image'
 
 export const SiteHeader = () => {
   return (
     <nav className="navbar fixed-top" style={{backgroundColor:"rgba(0,0,0,0.3)"}}>
       <nav className="navbar-brand">
         <Link className=" text-white" to="/">
-          TMDB Client
+          <img src={Icon} style={{height:"6vh"}}/>
         </Link>
       </nav>
 
