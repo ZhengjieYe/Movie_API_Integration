@@ -16,6 +16,21 @@
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  require('@cypress/code-coverage/task')(on, config)
+  
+  // add other tasks to be registered here
+  on(
+    'file:preprocessor',
+    require('@cypress/code-coverage/use-browserify-istanbul')
+  )
+  // IMPORTANT to return the config object
+  // with the any changed environment variables
+  return config
+}
+
+const preprocessor = require('cypress-react-unit-test/plugins/react-scripts')
+module.exports = (on, config) => {
+   preprocessor(on, config)
+  // IMPORTANT to return the config object
+  return config
 }

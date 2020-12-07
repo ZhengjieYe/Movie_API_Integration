@@ -38,3 +38,14 @@ export const getMovies = () => {
       .then(json => json.results);
   };
   
+  export const getMovieBackdrops = async (movie_id) => {
+    return await fetch(
+      `https://api.themoviedb.org/3/movie/${movie_id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+      .then(res => res.json())
+      .then(json => {
+        return json.backdrops.length === 0 ?
+          json.posters[0].flie_path:
+          json.backdrops[0].file_path
+      })
+  }

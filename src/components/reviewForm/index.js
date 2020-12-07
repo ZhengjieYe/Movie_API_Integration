@@ -19,21 +19,23 @@ const ReviewForm = ({ movie, history }) => {
       <div className="form-group">
         <input
           type="text"
+          data-test="review-form-author"
           className="form-control"
           placeholder="Author"
-          defaultValue={movie.review ? movie.review.author : ""}
+          defaultValue=""
           name="author"
           ref={register({ required: "Author name required" })}
         />
       </div>
-      {errors.author && <p className=" text-white">{errors.author.message} </p>}
+      {errors.author && <p className=" text-white" data-test="author-error-message">{errors.author.message} </p>}
       <div className="form-group">
         <textarea
           rows="10"
           type="text"
+          data-test="review-form-textarea"
           className="form-control"
           placeholder="Write your review"
-          defaultValue={movie.review ? movie.review.content : ""}
+          defaultValue=""
           name="content"
           ref={register({
             required: "No review text",
@@ -42,7 +44,7 @@ const ReviewForm = ({ movie, history }) => {
         />
       </div>
       {errors.content && (
-        <p className="text-white">{errors.content.message} </p>
+        <p className="text-white" data-test="content-error-message">{errors.content.message} </p>
       )}
 
       <button type="submit" className="btn btn-primary">
