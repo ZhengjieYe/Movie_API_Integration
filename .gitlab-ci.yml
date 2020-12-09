@@ -36,6 +36,8 @@ bundle_app:
 
 e2etest:    
     stage: test
+    except:
+      - develop
     before_script:
       - npm install -g http-server
       - npm install cypress
