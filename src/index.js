@@ -13,6 +13,8 @@ import GenresContextProvider from "./contexts/genresContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase';
+import LoginPage from './pages/loginPage'
+import SignupPage from './pages/signupPage'
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
+                  <Route path="/signup" component={SignupPage} />
+                  <Route path="/login" component={LoginPage}/>
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                   <Route exact path="/movies/upcoming" component={UpcomingMoviePage}/>
                   <Route path="/reviews/:id" component={MovieReviewPage} />
