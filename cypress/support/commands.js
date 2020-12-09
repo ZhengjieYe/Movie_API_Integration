@@ -29,5 +29,18 @@ Cypress.Commands.add("getBySel", (selector, ...args) => {
   });
 
 Cypress.Commands.add("getBySelLike", (selector, ...args) => {
-return cy.get(`[data-test*=${selector}]`, ...args);
+  return cy.get(`[data-test*=${selector}]`, ...args);
+});
+
+Cypress.Commands.add("register", (email,pass) => {
+  cy.getBySel("signup-email").clear().type(email);
+  cy.getBySel("signup-password").clear().type(pass);
+  cy.getBySel("signup-verify").clear().type(pass);
+  cy.get(".btn-primary").click();
+});
+
+Cypress.Commands.add("login", (email,pass) => {
+  cy.getBySel("login-email").clear().type(email);
+  if(pass) cy.getBySel("login-password").clear().type(pass);
+  cy.get(".btn-primary").click();
 });

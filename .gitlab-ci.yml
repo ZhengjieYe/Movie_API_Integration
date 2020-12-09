@@ -36,6 +36,8 @@ bundle_app:
 
 e2etest:    
     stage: test
+    except:
+      - develop
     before_script:
       - npm install -g http-server
       - npm install cypress
@@ -56,7 +58,7 @@ deploy_staging_job:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - echo -n "Deploy staging to test server..."
-    - ssh ec2-user@$STAGING_DEPLOY_SERVER 'cd staging_CICD && git pull origin staging && pm2 restart staging'
+    - ssh ec2-user@$STAGING_DEPLOY_SERVER 'cd staging_CICD && git pull origin staging && npm install && pm2 restart staging'
 
 deploy_master_job:
   stage: deploy
