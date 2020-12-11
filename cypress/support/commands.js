@@ -46,6 +46,7 @@ Cypress.Commands.add("login", (email,pass) => {
 });
 
 Cypress.Commands.add("logout",()=>{
+  cy.wait(5000)
   cy.getBySel("siteheader-user--login").click()
   cy.contains("Log out").click()
 })
