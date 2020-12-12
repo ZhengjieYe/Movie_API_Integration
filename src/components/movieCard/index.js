@@ -4,8 +4,9 @@ import "./movieCard.css";
 import "../../globals/fontawesome";
 import Card from 'react-bootstrap/Card'
 import _ from 'lodash';
-const MovieCard = ({movie, action}) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const MovieCard = ({movie, action}) => {
   return (
     <div className="col-sm-2 mb-3">
       <Card className="bg-dark">
@@ -26,6 +27,14 @@ const MovieCard = ({movie, action}) => {
           </Link>
           <Card.Body>
             <h6 className="text-center text-white pt-2" data-test="movie-card-title">{_.truncate(movie.title,{length:19})}</h6>
+            <p className="text-white-50">
+              <FontAwesomeIcon icon={["fas", "calendar"]} />
+              <span> {movie.release_date}</span>
+            </p>
+            <p className="text-white-50">
+              <FontAwesomeIcon icon={["fas", "star"]} />
+              <span> {movie.vote_average}</span>
+            </p>
           </Card.Body>
       </Card>
     </div>

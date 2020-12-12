@@ -9,11 +9,9 @@ describe("upcomming page",()=>{
         cy.getBySel("add-to-button--success").should("have.length",1)
     })
 
-    it("should change two buttons' state when you click button",()=>{
+    it.only("should change two buttons' state when you click button",()=>{
         cy.getBySel("header-number").text().should("eq","20");
         cy.getBySel("add-to-watch-button").eq(2).click();
         cy.getBySel("add-to-button--success").should("have.length",1)
-        cy.get(".carousel-indicators > li").eq(2).click();
-        cy.getBySel("add-to-content--success").should("be.visible")
     })
 })

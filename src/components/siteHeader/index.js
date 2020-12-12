@@ -55,7 +55,12 @@ export const SiteHeader = (props) => {
       
       {user.data && (
         <Dropdown className="ml-auto">
-        <Dropdown.Toggle id="dropdown-basic" className=" m-0 h-50" variant="outline-light">
+        <Dropdown.Toggle 
+          id="dropdown-basic" 
+          className=" m-0 h-50" 
+          variant="outline-light" 
+          data-test="siteheader-user--login"
+        >
           <Image 
           style={{height:"3vh"}}
           src="https://secure.gravatar.com/avatar/946129578ef96878bbca880ff261a685?s=46&d=identicon" 
@@ -64,9 +69,8 @@ export const SiteHeader = (props) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3" onClick={logout}>Log out</Dropdown.Item>
+          <Dropdown.Item date-test="siteheader-rate"><Link to="/rate">Rate now</Link></Dropdown.Item>
+          <Dropdown.Item data-test="siteheader-logout" onClick={logout}>Log out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       )}
