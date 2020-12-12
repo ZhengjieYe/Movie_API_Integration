@@ -15,10 +15,14 @@ import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase';
 import LoginPage from './pages/loginPage'
 import SignupPage from './pages/signupPage'
+import RatePage from './pages/ratePage'
+import { Provider } from 'react-redux';
+import store from "./reduxStore/store"
 
 const App = () => {
   return (
-    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <Provider store={store}>
+      <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <BrowserRouter>
         <div className="jumbotron p-0 m-0 w-100">
           <SiteHeader />
@@ -26,6 +30,7 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
+                  <Route path="/rate" component={RatePage} />
                   <Route path="/signup" component={SignupPage} />
                   <Route path="/login" component={LoginPage}/>
                   <Route exact path="/reviews/form" component={AddMovieReviewPage} />
@@ -46,7 +51,8 @@ const App = () => {
         </div>
       </BrowserRouter>
     </FirebaseAppProvider>
-  );
+    </Provider>
+    );
 };
 
 

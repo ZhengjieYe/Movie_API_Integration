@@ -4,7 +4,7 @@ describe("movie review page",()=>{
         let resquestId;
         before(() => {
             cy.visit("/")
-            cy.get(".card").eq(2).find("img").click();
+            cy.get(".card").eq(1).find("img").click();
             cy.url().then(($url)=>{
                 resquestId=$url.split("/").pop();
                 cy.request(
@@ -14,13 +14,13 @@ describe("movie review page",()=>{
                   )
                     .its("body")
                     .then((response) => {
-                      reviewId=response.results[0].id;
+                      reviewId=response.results.length>0?response.results[0].id:"";
                     })
             })
         });
         it("should toggle between show and hidden",()=>{
             cy.visit("/");
-            cy.get(".card").eq(2).find("img").click();
+            cy.get(".card").eq(1).find("img").click();
             cy.get("table").should("not.be.visible");
             cy.getBySel("show-review-button").click();
             cy.get("table").should("be.visible");
@@ -28,7 +28,7 @@ describe("movie review page",()=>{
 
         it("should show full review when you click the show full review button",()=>{
             cy.visit("/");
-            cy.get(".card").eq(2).find("img").click();
+            cy.get(".card").eq(1).find("img").click();
             cy.getBySel("show-review-button").click();
             cy.contains("Full Review").click();
             cy.url().should("match",new RegExp(`${reviewId}$`));
