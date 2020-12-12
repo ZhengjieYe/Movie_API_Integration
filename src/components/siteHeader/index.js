@@ -80,6 +80,7 @@ export const SiteHeader = (props) => {
 
         <Dropdown.Menu>
           <Dropdown.Item date-test="siteheader-rate"><Link to="/rate">Rate now</Link></Dropdown.Item>
+          <Dropdown.Item ><Link to="/watchlist">Watchlist</Link></Dropdown.Item>
           <Dropdown.Item data-test="siteheader-logout" onClick={logout}>Log out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
