@@ -16,6 +16,7 @@ import firebaseConfig from './firebase';
 import LoginPage from './pages/loginPage'
 import SignupPage from './pages/signupPage'
 import RatePage from './pages/ratePage'
+import WatchListPage from './pages/watchListPage'
 import { Provider } from 'react-redux';
 import store from "./reduxStore/store"
 
@@ -30,6 +31,7 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
+                  <Route path="/watchlist" component={WatchListPage} />
                   <Route path="/rate" component={RatePage} />
                   <Route path="/signup" component={SignupPage} />
                   <Route path="/login" component={LoginPage}/>

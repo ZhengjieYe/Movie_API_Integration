@@ -20,16 +20,19 @@ const MovieCarousels=({items, carouselAction})=>{
           className="text-left w-50 h-100 pl-4"
           style={{top:0,left:0,backgroundImage:"linear-gradient(to right,rgba(0,0,0,1), rgba(0,0,0,0))"}}
         >
-          <h1 className="mb-5 mt-5">{item.title}</h1>
+          <h1 className="mb-5 mt-5 text-white">{item.title}</h1>
           {carouselAction(item)}
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            className="text-white ml-5"
-            style={{opacity:0.7}}
-          >
-              More info
-          </Button>
+          <Link to={`/movies/${item.id}`}>
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="text-white ml-5"
+              style={{opacity:0.7}}
+            >
+                More info
+            </Button>
+          </Link>
+          
           <p className="w-75 mt-2">{item.overview}</p>
         </Carousel.Caption>
     </Carousel.Item>

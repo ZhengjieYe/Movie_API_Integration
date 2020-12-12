@@ -24,6 +24,10 @@ export const slice = createSlice({
     },
     loadRatedMovies: (state, action) =>{
       state.ratedMovies=action.payload;
+    },
+    deleteBoth:(state)=>{
+      state.session_key=""
+      state.token=""
     }
     // decrement: state => {
     //   state.value -= 1;
@@ -34,7 +38,7 @@ export const slice = createSlice({
   },
 });
 
-export const { loadMovies, loadToken, loadSessionKey, loadRatedMovies } = slice.actions;
+export const { loadMovies, loadToken, loadSessionKey, loadRatedMovies, deleteBoth } = slice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
