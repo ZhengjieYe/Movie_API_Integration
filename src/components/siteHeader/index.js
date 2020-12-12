@@ -7,15 +7,25 @@ import Image from 'react-bootstrap/Image'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useUser } from 'reactfire' ;
 import { withRouter } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import { deleteBoth } from '../../reduxStore/slice/movieSlice'
+import { deleteSession } from '../../api/tmdb-api'
 
 import { useFirebaseApp } from 'reactfire' ;
 import 'firebase/auth'
 
 
 export const SiteHeader = (props) => {
+  const movies=useSelector(state=>state.movies)
+  const dispatch=useDispatch()
+
   const firebase=useFirebaseApp();
   const user=useUser();
   const logout=()=>{
+    deleteSession(movies.session_key).then((res)=>{
+      console.log(res);
+      dispatch(deleteBoth())
+    })
     firebase.auth().signOut();
     props.history.push("/");
   }
