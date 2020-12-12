@@ -43,9 +43,11 @@ const MovieReviewPage = (props) => {
     },[movies.token,movies.session_key])
 
     const handleRate=(id,value)=>{
-      postRating(id,movies.session_key,value);
-      getStoreRated(movies.session_key);
-      window.location.reload()
+      postRating(id,movies.session_key,value).then(()=>{
+        setTimeout(()=>{
+          getStoreRated(movies.session_key);
+        },500)
+      });
     }
   return (
     <Container fluid>
