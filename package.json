@@ -32,7 +32,8 @@
     "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "report": "npx nyc report --reporter=text-summary"
   },
   "eslintConfig": {
     "extends": "react-app"
