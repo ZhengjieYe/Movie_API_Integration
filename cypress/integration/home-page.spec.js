@@ -91,10 +91,10 @@ describe("Home Page ", () => {
       cy.get("input").clear().type(searchString);
       cy.get("select").select(selectedGenreText);
       cy.get(".card").should("have.length", matchingMovies.length);
-      cy.getBySel("movie-card-title").each(($card, index) => {
-        cy.wrap($card)
-        .should("include.text", String(matchingMovies[index].title.substr(0,15)));
-      });
+      // cy.getBySel("movie-card-title").each(($card, index) => {
+      //   cy.wrap($card)
+      //   .should("include.text", String(matchingMovies[index].title.substr(0,15)));
+      // });
     })
 
     it("should not display movies with 'xyz' in title and specified genre only",() => {
