@@ -21,6 +21,7 @@ import { Provider } from 'react-redux';
 import store from "./reduxStore/store"
 import PopularActorPage from './pages/popularActorPage'
 import ActorDetail from './pages/actorDetailPage'
+import NowPlayingPage from './pages/nowPlayingPage'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
+                  <Route path="/nowplaying" component={NowPlayingPage} />
                   <Route path="/actor/:id" component={ActorDetail} />
                   <Route path="/popular" component={PopularActorPage} />
                   <Route path="/watchlist" component={WatchListPage} />
