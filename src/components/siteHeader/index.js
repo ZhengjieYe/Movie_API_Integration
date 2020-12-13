@@ -23,7 +23,6 @@ export const SiteHeader = (props) => {
   const user=useUser();
   const logout=()=>{
     deleteSession(movies.session_key).then((res)=>{
-      console.log(res);
       dispatch(deleteBoth())
     })
     firebase.auth().signOut();
@@ -52,6 +51,11 @@ export const SiteHeader = (props) => {
           <li className="nav-item">
             <Link className="nav-link text-white" to="/movies/favorites" data-test="site-header-favorites">
               Favorites
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/popular" data-test="site-header-popular">
+              Popular Actor
             </Link>
           </li>
         </ul>

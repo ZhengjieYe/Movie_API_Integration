@@ -19,6 +19,8 @@ import RatePage from './pages/ratePage'
 import WatchListPage from './pages/watchListPage'
 import { Provider } from 'react-redux';
 import store from "./reduxStore/store"
+import PopularActorPage from './pages/popularActorPage'
+import ActorDetail from './pages/actorDetailPage'
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
+                  <Route path="/actor/:id" component={ActorDetail} />
+                  <Route path="/popular" component={PopularActorPage} />
                   <Route path="/watchlist" component={WatchListPage} />
                   <Route path="/rate" component={RatePage} />
                   <Route path="/signup" component={SignupPage} />
