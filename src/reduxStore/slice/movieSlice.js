@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 let token = sessionStorage.getItem('tmdb-token')?sessionStorage.getItem('tmdb-token'):""
 let session = sessionStorage.getItem('tmdb-session')?sessionStorage.getItem('tmdb-session'):""
-console.log(token,session);
 export const slice = createSlice({
   name: 'movies',
   initialState: {

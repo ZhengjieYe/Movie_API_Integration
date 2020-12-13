@@ -25,7 +25,6 @@ const MovieReviewPage = (props) => {
         })
         if(movies.session_key===""){
           if(movies.token!==""){
-            console.log(movies.token);
             getSession(movies.token).then(res=>{
               dispatch(loadSessionKey(res.data.session_id));
             }).catch(err=>{

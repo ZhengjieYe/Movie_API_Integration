@@ -14,7 +14,6 @@ describe('HelloWorld component', () => {
     .then((response)=>{
       testMovie=response;
       testMovie.poster_path="";
-      console.log(testMovie);
     });
   })
   
