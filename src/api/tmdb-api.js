@@ -93,3 +93,11 @@ export const getMovies = () => {
       .then(res=>res.json())
       .then(json=> json.results)
   }
+
+    export const deleteSession=(session)=>{
+      return axios.delete(`https://api.themoviedb.org/3/authentication/session?api_key=${process.env.REACT_APP_TMDB_KEY}`,{
+        data:{
+          session_id:session
+        }
+      })
+    }
