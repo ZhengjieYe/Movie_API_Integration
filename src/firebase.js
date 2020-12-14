@@ -1,11 +1,12 @@
+import dotenv from 'dotenv'
+dotenv.config()
 const firebaseConfig = {
-    apiKey: "AIzaSyCIGlcX9S75PGsEFZwBO5FmTINf2AFCTDg",
-    authDomain: "movieapp-30589.firebaseapp.com",
-    projectId: "movieapp-30589",
-    storageBucket: "movieapp-30589.appspot.com",
-    messagingSenderId: "246577744348",
-    appId: "1:246577744348:web:da3dba93aab14161362719",
-    measurementId: "G-VFF43CX0PQ"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
-
 export default firebaseConfig;
