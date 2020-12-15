@@ -7,21 +7,19 @@ import MoviesHeader from "../src/components/headerMovieList";
 import MovieList from "../src/components/movieList";
 import MovieDetails from "../src/components/movieDetails";
 import MovieHeader from "../src/components/headerMovie";
-import AddFavoriteButton from "../src/components/buttons/addToFavorites";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
 import MoviesContextProvider from '../src/contexts/moviesContext'
 import ReviewForm from '../src/components/reviewForm'
 import ActorCard from '../src/components/actorCard'
-import ActorInfo from '../src/components/actorInfo'
 import KnowForCard from '../src/components/knowForCard'
 import MovieCarouselShow from '../src/components/movieCarouselShow'
 import SignupForm from '../src/components/signupForm'
 import SiteHeader from '../src/components/siteHeader'
 import SortbyButtonGroup from '../src/components/sortbyButtonGroup'
-import RemoveAlert from '../src/components/alert/removeAlert'
 import AddButton from '../src/components/buttons/addButton'
+import ComboButton from '../src/components/buttons/comboButton'
 import { Provider } from 'react-redux';
 import store from "../src/reduxStore/store"
 import { FirebaseAppProvider } from 'reactfire';
