@@ -99,3 +99,13 @@ export const deleteWachlist =async (id) => {
     method: 'delete'
   }).then(res => res.json())
 };
+
+export const getNowPlaying =async () => {
+  return fetch('/api/playing', {
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    method: 'get'
+  }).then(res => res.json())
+    .then(json=>json.playingMovies);
+};
