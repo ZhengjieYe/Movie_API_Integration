@@ -35,7 +35,7 @@ const SignupForm = ({onSubmit, user}) => {
             data-test="signup-password"
             name="password"
             type="password"
-            ref={register({ required: true, minLength: 8 })}
+            ref={register({ required: true, minLength: 4 })}
         />
         </div>
 
@@ -46,13 +46,19 @@ const SignupForm = ({onSubmit, user}) => {
             data-test="signup-verify"
             name="verify"
             type="password"
-            ref={register({ required: true, minLength: 8 })}
+            ref={register({ required: true, minLength: 4 })}
         />
         <label className="text-warning">
             {errors.password?.type==="required" && <p>Please enter your password</p>}
         </label>
         <label className="text-warning">
-            {errors.password?.type==="minLength" && <p>your password should be longer than 8</p>}
+            {errors.password?.type==="minLength" && <p>your password should be longer than 4</p>}
+        </label>
+        <label className="text-warning">
+            {errors.verify?.type==="required" && <p>Please enter your verify password </p>}
+        </label>
+        <label className="text-warning">
+            {errors.verify?.type==="minLength" && <p>your verify password should be longer than 4</p>}
         </label>
         <label className="text-warning">{user.error}</label>
         </div>

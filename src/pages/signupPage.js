@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import {Link} from 'react-router-dom'
+import {register} from '../api/movie-api'
 
 const LoginPage = () => {
   const firebase = useFirebaseApp();
@@ -20,32 +21,47 @@ const LoginPage = () => {
   });
 
   const onSubmit =async data => {
-    await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-    .then( result => {
-      const myURL = { url : 'http://localhost:3000/' }
-      result.user.sendEmailVerification(myURL)
-        .then( () => {
-          setUser({
-            ...user,
-            verifyEmail : `Welcome!. To continue please verify your email.` ,
-          })
+    await register(data.email, data.password).then(res=>{
+      console.log(res);
+      if(res.code===201){
+        console.log('hi');
+        setUser({
+          ...user,
+          verifyEmail : `Welcome!. To continue please verify your email.` ,
         })
-        .catch( error => {
-          setUser({
-            ...user,
-            error : error.message,
-          })
+      }else{
+        setUser({
+          ...user,
+          error : res.msg,
         })
-
-      // Sign Out the user.
-      firebase.auth().signOut();
-    }).catch( error => {
-      // Update the error
-      setUser({
-        ...user,
-        error : error.message,
-      })
+      }
     })
+    // await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+    // .then( result => {
+    //   const myURL = { url : 'http://localhost:3000/' }
+    //   result.user.sendEmailVerification(myURL)
+    //     .then( () => {
+    //       setUser({
+    //         ...user,
+    //         verifyEmail : `Welcome!. To continue please verify your email.` ,
+    //       })
+    //     })
+    //     .catch( error => {
+    //       setUser({
+    //         ...user,
+    //         error : error.message,
+    //       })
+    //     })
+
+    //   // Sign Out the user.
+    //   firebase.auth().signOut();
+    // }).catch( error => {
+    //   // Update the error
+    //   setUser({
+    //     ...user,
+    //     error : error.message,
+    //   })
+    // })
 }
 
 
