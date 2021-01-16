@@ -109,3 +109,35 @@ export const getNowPlaying =async () => {
   }).then(res => res.json())
     .then(json=>json.playingMovies);
 };
+
+
+export const getTopRated =async () => {
+  return fetch('/api/topRated', {
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      method: 'get'
+  }).then(res => res.json())
+};
+
+export const getRated =async () => {
+  return fetch('/api/rate', {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'get'
+  }).then(res => res.json())
+    .then(json=>json.ratedMovies)
+};
+
+export const postRate =async (id,rating) => {
+  return fetch('/api/rate', {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'post',
+      body: JSON.stringify({ id: id, rating:rating })
+  }).then(res => res.json())
+};
