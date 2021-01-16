@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useReducer } from "react";
 import { getUpcomingMovies, getNowPlaying } from "../api/tmdb-api";
-import {getMovies} from '../api/movie-api';
+import {getMovies,addToDBFavorites,getFavorites} from '../api/movie-api';
 
 export const MoviesContext = createContext(null);
 
@@ -15,7 +15,10 @@ const reducer = (state, action) => {
         nowplaying:[...state.nowplaying]
       };
     case "load":
-      return { movies: action.payload.movies, upcoming: [...state.upcoming],nowplaying:[...state.nowplaying] };
+      return { movies: action.payload.movies.map((m)=>
+          action.payload.favoritesId.indexOf(m.id)!== -1? { ...m, favorite: true } : m
+        ),
+         upcoming: [...state.upcoming],nowplaying:[...state.nowplaying] };
     case "load-upcoming":
       return { upcoming: action.payload.movies, movies: [...state.movies], nowplaying:[...state.nowplaying] };
     case "loadNowplay":
@@ -70,6 +73,7 @@ const MoviesContextProvider = (props) => {
 
   const addToFavorites = (movieId) => {
     const index = state.movies.map((m) => m.id).indexOf(movieId);
+    addToDBFavorites(movieId);
     dispatch({ type: "add-favorite", payload: { movie: state.movies[index] } });
   };
 
@@ -88,9 +92,12 @@ const MoviesContextProvider = (props) => {
 
 
   useEffect(() => {
-    getMovies().then((movies) => {
-      dispatch({ type: "load", payload: { movies } });
-      dispatch({ payload: { movies } }); //run default case
+    getFavorites().then(favorites=>{
+      const favoritesId=favorites.map(f=>f.id);
+      getMovies().then((movies) => {
+        dispatch({ type: "load", payload: { movies,favoritesId } });
+        dispatch({ payload: { movies } }); //run default case
+      })
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import { useFirebaseApp } from 'reactfire';
-import 'firebase/auth'
+// import { useFirebaseApp } from 'reactfire';
+// import 'firebase/auth'
 import welcome_bg from '../assets/img/welcome_bg.jpg'
 import SignupForm from '../components/signupForm'
 import Icon from '../assets/img/TMDB.png'
@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 import {register} from '../api/movie-api'
 
 const LoginPage = () => {
-  const firebase = useFirebaseApp();
+  // const firebase = useFirebaseApp();
   const [user, setUser] = useState({
     email : '' ,
     password : '' ,
