@@ -57,4 +57,5 @@
     "cypress-react-unit-test": "^4.17.1",
     "start-server-and-test": "^1.10.6"
   }
+  ,"proxy":"http://localhost:8080"
 }

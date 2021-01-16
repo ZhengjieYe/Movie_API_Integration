@@ -1,15 +1,21 @@
 import React,{useState} from "react";
 import {Link} from "react-router-dom"
 import useForm from "react-hook-form";
-import { useFirebaseApp } from 'reactfire';
+// import { useFirebaseApp } from 'reactfire';
 import 'firebase/auth'
 import welcome_bg from '../assets/img/welcome_bg.jpg'
 import Icon from '../assets/img/TMDB.png'
 import {withRouter} from 'react-router-dom'
+import {login} from '../api/movie-api';
+import { useDispatch } from "react-redux";
+import {loadToken} from '../reduxStore/slice/movieSlice'
 
 const LoginPage = (props) => {
+  // const movies=useSelector(state=>state.movies)
+  const dispatch=useDispatch()
+
   const { register, handleSubmit, errors } = useForm();
-  const firebase = useFirebaseApp();
+  // const firebase = useFirebaseApp();
   const [user, setUser] = useState({
     email : '' ,
     password : '' ,
@@ -17,18 +23,21 @@ const LoginPage = (props) => {
   });
 
   const onSubmit = data => {
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+    login(data.email, data.password)
     .then( result => {
-      setUser({
-        ...user,
-      })
-      props.history.push('/')
-    })
-    .catch( error => {
-      setUser({
-        ...user,
-        error : error.message,
-      })
+      if(result.code){
+        setUser({
+          ...user,
+          error: result.msg
+        })
+      }else{
+        setUser({
+          ...user
+        })
+        dispatch(loadToken(result.token))
+
+        props.history.push('/')
+      }
     })
 
   }; 
@@ -62,13 +71,13 @@ const LoginPage = (props) => {
               className="form-control"
               name="password"
               type="password"
-              ref={register({ required: true, minLength: 8 })}
+              ref={register({ required: true, minLength: 4 })}
             />
             <label className="text-warning">
               {errors.password?.type==="required" && <p>Please enter your password</p>}
             </label>
             <label className="text-warning">
-              {errors.password?.type==="minLength" && <p>your password should be longer than 8</p>}
+              {errors.password?.type==="minLength" && <p>your password should be longer than 4</p>}
             </label>
             <label className="text-warning">{user.error}</label>
           </div>

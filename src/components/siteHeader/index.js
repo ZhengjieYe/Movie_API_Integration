@@ -5,28 +5,29 @@ import "./siteHeader.css";
 import Icon from '../../assets/img/TMDB.png'
 import Image from 'react-bootstrap/Image'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useUser } from 'reactfire' ;
+// import { useUser } from 'reactfire' ;
 import { withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { deleteBoth } from '../../reduxStore/slice/movieSlice'
-import { deleteSession } from '../../api/tmdb-api'
+// import { deleteSession } from '../../api/tmdb-api'
 
-import { useFirebaseApp } from 'reactfire' ;
-import 'firebase/auth'
+// import { useFirebaseApp } from 'reactfire' ;
+// import 'firebase/auth'
+import {logout} from "../../api/movie-api"
 
 
 export const SiteHeader = (props) => {
   const movies=useSelector(state=>state.movies)
   const dispatch=useDispatch()
 
-  const firebase=useFirebaseApp();
-  const user=useUser();
-  const logout=()=>{
-    deleteSession(movies.session_key).then((res)=>{
+  // const firebase=useFirebaseApp();
+  // const user=useUser();
+  const logoutAndDelete=()=>{
+    logout(movies.token).then(res=>{
+      console.log(res);
       dispatch(deleteBoth())
+      props.history.push("/");
     })
-    firebase.auth().signOut();
-    props.history.push("/");
   }
   return (
     <nav className="navbar fixed-top " style={{backgroundColor:"rgba(0,0,0,0.3)"}}>
@@ -66,13 +67,13 @@ export const SiteHeader = (props) => {
         </ul>
       </nav>
 
-      {!user.data && (
+      {!movies.token && (
         <Link to="/login" className="btn btn-outline-light ml-auto" data-test="site-header-login">
         Log in
       </Link>
       )}
       
-      {user.data && (
+      {movies.token && (
         <Dropdown className="ml-auto">
         <Dropdown.Toggle 
           id="dropdown-basic" 
@@ -90,7 +91,7 @@ export const SiteHeader = (props) => {
         <Dropdown.Menu>
           <Dropdown.Item date-test="siteheader-rate"><Link to="/rate">Rate now</Link></Dropdown.Item>
           <Dropdown.Item ><Link to="/watchlist">Watchlist</Link></Dropdown.Item>
-          <Dropdown.Item data-test="siteheader-logout" onClick={logout}>Log out</Dropdown.Item>
+          <Dropdown.Item data-test="siteheader-logout" onClick={logoutAndDelete}>Log out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       )}
