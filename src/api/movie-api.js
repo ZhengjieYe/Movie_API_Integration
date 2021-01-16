@@ -68,3 +68,34 @@ export const getUpcomingMovies =async () => {
       method: 'get'
   }).then(res => res.json())
 };
+
+export const getWachlist =async () => {
+  return fetch('/api/upcoming/watchlist', {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'get'
+  }).then(res => res.json())
+};
+
+export const postWachlist =async (id) => {
+  return fetch('/api/upcoming/watchlist', {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': sessionStorage.getItem('tmdb-token')
+    },
+    method: 'post',
+    body: JSON.stringify({ id: id })
+  }).then(res => res.json())
+};
+
+export const deleteWachlist =async (id) => {
+  return fetch(`/api/upcoming/watchlist/${id}`, {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': sessionStorage.getItem('tmdb-token')
+    },
+    method: 'delete'
+  }).then(res => res.json())
+};

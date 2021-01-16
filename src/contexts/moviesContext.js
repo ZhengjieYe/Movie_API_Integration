@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useReducer } from "react";
-import { getUpcomingMovies, getNowPlaying } from "../api/tmdb-api";
-import {getMovies,addToDBFavorites,getFavorites} from '../api/movie-api';
+import { getNowPlaying } from "../api/tmdb-api";
+import {getMovies,addToDBFavorites,getFavorites,getUpcomingMovies,getWachlist,postWachlist,deleteWachlist} from '../api/movie-api';
 
 export const MoviesContext = createContext(null);
 
@@ -20,7 +20,11 @@ const reducer = (state, action) => {
         ),
          upcoming: [...state.upcoming],nowplaying:[...state.nowplaying] };
     case "load-upcoming":
-      return { upcoming: action.payload.movies, movies: [...state.movies], nowplaying:[...state.nowplaying] };
+      return { 
+        upcoming: action.payload.movies.map((u)=>
+        action.payload.watchlistId.indexOf(u.id)!==-1 ? {...u, isInWatchList: true } : u
+      ),
+        movies: [...state.movies], nowplaying:[...state.nowplaying] };
     case "loadNowplay":
       return { movies: [...state.movies], upcoming: [...state.upcoming],nowplaying:action.payload.nowplaying } 
     case "add-review":
@@ -68,6 +72,7 @@ const MoviesContextProvider = (props) => {
 
   const addToWatchList = (movieId) => {
     const index = state.upcoming.map((m) => m.id).indexOf(movieId);
+    postWachlist(movieId);
     dispatch({ type: "add-watch", payload: { upcoming: state.upcoming[index] } });
   }
 
@@ -87,6 +92,7 @@ const MoviesContextProvider = (props) => {
   }
   const removeFromWatchlist = (movieId) => {
     const index = state.upcoming.map((m) => m.id).indexOf(movieId);
+    deleteWachlist(movieId);
     dispatch({ type: "remove-watchlist", payload: { upcoming: state.upcoming[index] } });
   }
 
@@ -110,9 +116,15 @@ const MoviesContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    getUpcomingMovies().then((movies) => {
-      dispatch({ type: "load-upcoming", payload: { movies } });
-    });
+    getWachlist().then(res=>{
+      const watchlist=res.watchlist;
+      const watchlistId=watchlist.map(w=>w.id);
+      
+      getUpcomingMovies().then((movies) => {
+        dispatch({ type: "load-upcoming", payload: { movies,watchlistId } });
+      });
+    })
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
