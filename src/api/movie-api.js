@@ -141,3 +141,22 @@ export const postRate =async (id,rating) => {
       body: JSON.stringify({ id: id, rating:rating })
   }).then(res => res.json())
 };
+
+export const getPopularActors =async (sort,filter) => {
+  return fetch(`/api/popular/actors?sort=${sort}&filter=${filter}`, {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'get'
+  }).then(res => res.json())
+    .then(json=>json.actors)
+};
+
+export const getActorKnowFor =async (id) => {
+  return fetch(`/api/popular/actors/${id}/known_for_movies`, {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'get'
+  }).then(res => res.json())
+};

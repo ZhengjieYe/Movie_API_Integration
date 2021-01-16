@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter,Route } from 'react-router-dom'
-import { getPersonDetail, getPopularPeople } from '../api/tmdb-api'
+import { getPersonDetail } from '../api/tmdb-api'
+import {getPopularActors,getActorKnowFor} from '../api/movie-api'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,9 +14,11 @@ const ActorDetailPage = (props)=>{
   const [detail,setDetail]=useState({})
   useEffect(()=>{
     getPersonDetail(id).then(res=>{
-      getPopularPeople().then(response=>{
+      getPopularActors().then(response=>{
         const result=response.filter(a=>String(a.id)===String(id));
-        setDetail({...res,...result[0]})
+        getActorKnowFor(id).then(knowFor=>{
+          setDetail({...res,...result[0],known_for:knowFor.known_for})
+        })
       })
     })
 // eslint-disable-next-line react-hooks/exhaustive-deps
