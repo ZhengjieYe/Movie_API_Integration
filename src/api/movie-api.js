@@ -27,3 +27,13 @@ export const logout = (token) => {
       body: JSON.stringify({ token: token })
   }).then(res => res.json())
 };
+
+export const getMovies = (token) => {
+  return fetch('/api/movies', {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'get'
+  }).then(res => res.json())
+};
