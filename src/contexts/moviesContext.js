@@ -98,7 +98,7 @@ const MoviesContextProvider = (props) => {
 
   useEffect(() => {
     getFavorites().then(favorites=>{
-      const favoritesId=favorites.map(f=>f.id);
+      const favoritesId=favorites.status==="fail"?[]:favorites.map(f=>f.id);
       getMovies().then((movies) => {
         dispatch({ type: "load", payload: { movies,favoritesId } });
         dispatch({ payload: { movies } }); //run default case
@@ -116,8 +116,15 @@ const MoviesContextProvider = (props) => {
 
   useEffect(() => {
     getWachlist().then(res=>{
-      const watchlist=res.watchlist;
-      const watchlistId=watchlist.map(w=>w.id);
+      console.log(res);
+      let watchlistId;
+      if(res.status==="fail"){
+        watchlistId=[];
+      }else{
+        const watchlist=res.watchlist;
+        watchlistId=watchlist.map(w=>w.id);
+      }
+      
       
       getUpcomingMovies().then((movies) => {
         dispatch({ type: "load-upcoming", payload: { movies,watchlistId } });
