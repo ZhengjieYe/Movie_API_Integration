@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
+import {getMovieReviews} from '../../api/movie-api'
 
 export default ({ movie }) => {
   const [reviews, setReviews] = useState([]);
@@ -10,7 +10,7 @@ export default ({ movie }) => {
     getMovieReviews(movie.id).then(reviews => {
       setReviews(reviews);
     });
-  });
+  },[]);
   return (
     <table className="table table-striped table-bordered table-hover">
       <thead>

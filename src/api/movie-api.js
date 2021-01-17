@@ -37,6 +37,16 @@ export const getMovies = (token) => {
   }).then(res => res.json())
 };
 
+export const getMovieReviews =async (id) => {
+  return fetch(`/api/movies/${id}/reviews`, {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'get'
+  }).then(res => res.json())
+    .then(json => json.reviews)
+};
+
 export const addToDBFavorites = (id) => {
   return fetch('/api/users/favourites', {
       headers: {
@@ -160,3 +170,4 @@ export const getActorKnowFor =async (id) => {
       method: 'get'
   }).then(res => res.json())
 };
+
