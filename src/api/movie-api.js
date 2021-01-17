@@ -171,3 +171,25 @@ export const getActorKnowFor =async (id) => {
   }).then(res => res.json())
 };
 
+export const getRecommendMovies =async () => {
+  return fetch(`/api/recommend/movies`, {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'get'
+  }).then(res => res.json())
+    .then(json=>json.recommendMovies)
+};
+
+
+export const getRecommendActors =async () => {
+  return fetch(`/api/recommend/actors`, {
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('tmdb-token')
+      },
+      method: 'get'
+  }).then(res => res.json())
+    .then(json=>json.recommendActors)
+};
